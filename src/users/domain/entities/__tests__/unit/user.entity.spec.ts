@@ -37,4 +37,16 @@ describe('UserEntity Uint Test', () => {
     expect(sut.props.cratedAt).toBeDefined()
     expect(sut.props.cratedAt).toBeInstanceOf(Date)
   })
+
+  it('Should update name', () => {
+    const newName = 'newname'
+    sut.update(newName)
+    expect(sut.props.name).toEqual(newName)
+  })
+
+  it('Should update password', () => {
+    const newPassword = 'newpassword'
+    sut.updatePassword(newPassword)
+    expect(sut.props.password).toEqual(newPassword)
+  })
 })
