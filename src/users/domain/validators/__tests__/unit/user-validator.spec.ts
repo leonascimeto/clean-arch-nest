@@ -79,4 +79,60 @@ describe('UserValidator Unit Test', () => {
       ])
     })
   })
+
+  describe('Password Field', () => {
+    it('Invalid cases for password fields', () => {
+      let isValid = sut.validate(null)
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['password']).toEqual([
+        'password should not be empty',
+        'password must be a string',
+        'password must be shorter than or equal to 100 characters',
+      ])
+
+      isValid = sut.validate({ ...UserDataBuilder({}), password: '' as any })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['password']).toEqual(['password should not be empty'])
+
+      isValid = sut.validate({ ...UserDataBuilder({}), password: 10 as any })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['password']).toEqual([
+        'password must be a string',
+        'password must be shorter than or equal to 100 characters',
+      ])
+
+      isValid = sut.validate({
+        ...UserDataBuilder({}),
+        password: 'a'.repeat(256),
+      })
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['password']).toEqual([
+        'password must be shorter than or equal to 100 characters',
+      ])
+    })
+  })
+
+  describe('CreatedAt Field', () => {
+    it('Invalid cases for createdAt fields', () => {
+      let isValid = sut.validate({
+        ...UserDataBuilder({}),
+        cratedAt: 'invalid' as any,
+      })
+
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['createdAt']).toEqual([
+        'createdAt must be a Date instance',
+      ])
+
+      isValid = sut.validate({
+        ...UserDataBuilder({}),
+        cratedAt: 10 as any,
+      })
+
+      expect(isValid).toBeFalsy()
+      expect(sut.errors['createdAt']).toEqual([
+        'createdAt must be a Date instance',
+      ])
+    })
+  })
 })

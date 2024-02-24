@@ -22,8 +22,8 @@ export class UserRules {
   email: string
 
   @MaxLength(100)
-  @IsNotEmpty()
   @IsString()
+  @IsNotEmpty()
   password: string
 
   @IsDate()
