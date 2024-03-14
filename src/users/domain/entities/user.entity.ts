@@ -6,7 +6,7 @@ export type UserProps = {
   name: string
   email: string
   password: string
-  cratedAt?: Date
+  createdAt?: Date
 }
 
 export class UserEntity extends Entity<UserProps> {
@@ -16,7 +16,7 @@ export class UserEntity extends Entity<UserProps> {
   ) {
     UserEntity.validate(props)
     super(props, id)
-    this.props.cratedAt = this.props.cratedAt ?? new Date()
+    this.props.createdAt = this.props.createdAt ?? new Date()
   }
 
   update(value: string): void {
@@ -50,7 +50,7 @@ export class UserEntity extends Entity<UserProps> {
   }
 
   get cratedAt(): Date {
-    return this.props.cratedAt
+    return this.props.createdAt
   }
 
   static validate(props: UserProps) {

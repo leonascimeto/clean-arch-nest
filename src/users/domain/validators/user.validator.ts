@@ -30,11 +30,11 @@ export class UserRules {
   @IsOptional()
   createdAt: Date
 
-  constructor({ email, name, password, cratedAt }: UserProps) {
+  constructor({ email, name, password, createdAt }: UserProps) {
     this.email = email
     this.name = name
     this.password = password
-    this.createdAt = cratedAt
+    this.createdAt = createdAt
   }
 }
 

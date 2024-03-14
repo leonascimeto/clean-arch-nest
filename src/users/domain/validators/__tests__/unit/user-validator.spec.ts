@@ -116,7 +116,7 @@ describe('UserValidator Unit Test', () => {
     it('Invalid cases for createdAt fields', () => {
       let isValid = sut.validate({
         ...UserDataBuilder({}),
-        cratedAt: 'invalid' as any,
+        createdAt: 'invalid' as any,
       })
 
       expect(isValid).toBeFalsy()
@@ -126,7 +126,7 @@ describe('UserValidator Unit Test', () => {
 
       isValid = sut.validate({
         ...UserDataBuilder({}),
-        cratedAt: 10 as any,
+        createdAt: 10 as any,
       })
 
       expect(isValid).toBeFalsy()

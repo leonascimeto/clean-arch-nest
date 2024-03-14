@@ -14,7 +14,7 @@ describe('UserEntity Uint Test', () => {
     expect(sut.props.name).toEqual(props.name)
     expect(sut.props.email).toEqual(props.email)
     expect(sut.props.password).toEqual(props.password)
-    expect(sut.props.cratedAt).toBeInstanceOf(Date)
+    expect(sut.props.createdAt).toBeInstanceOf(Date)
   })
 
   it('Should return name', () => {
@@ -36,8 +36,8 @@ describe('UserEntity Uint Test', () => {
   })
 
   it('Should return cratedAt', () => {
-    expect(sut.props.cratedAt).toBeDefined()
-    expect(sut.props.cratedAt).toBeInstanceOf(Date)
+    expect(sut.props.createdAt).toBeDefined()
+    expect(sut.props.createdAt).toBeInstanceOf(Date)
   })
 
   it('Should update name', () => {
