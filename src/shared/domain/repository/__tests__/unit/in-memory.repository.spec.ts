@@ -35,4 +35,13 @@ describe('InMemoryRepository Unit Tests', () => {
       new NotFoundError('Entity not found'),
     )
   })
+
+  it('should find all entities', async () => {
+    const entity1 = new StubEntity({ name: 'test name 1', price: 50 })
+    const entity2 = new StubEntity({ name: 'test name 2', price: 100 })
+    await sut.insert(entity1)
+    await sut.insert(entity2)
+    const result = await sut.findAll()
+    expect(result).toStrictEqual([entity1, entity2])
+  })
 })
