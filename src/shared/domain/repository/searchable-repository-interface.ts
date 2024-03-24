@@ -1,3 +1,4 @@
+import { parse } from 'path'
 import { Entity } from '../entity/entity'
 import { RepositoryInterface } from './repository-interface'
 
@@ -29,31 +30,59 @@ export class SearchParams {
     return this._page
   }
 
-  private set page(value: number) {}
+  private set page(value: number) {
+    let _page = +value
+    if (Number.isNaN(_page) || _page <= 0 || parseInt(_page as any) !== _page)
+      _page = 1
+    this._page = _page
+  }
 
   get perPage(): number {
     return this._perPage
   }
 
-  private set perPage(value: number) {}
+  private set perPage(value: number) {
+    let _perPage = +value
+    if (
+      Number.isNaN(_perPage) ||
+      _perPage <= 0 ||
+      parseInt(_perPage as any) !== _perPage
+    )
+      _perPage = this._perPage
+    this._perPage = _perPage
+  }
 
   get sort(): string | null {
     return this._sort
   }
 
-  private set sort(value: string | null) {}
+  private set sort(value: string | null) {
+    this._sort =
+      value === null || value === '' || value === undefined ? null : `${value}`
+  }
 
   get sortDir(): SortDirection | null {
     return this._sortDir
   }
 
-  private set sortDir(value: SortDirection | null) {}
+  private set sortDir(value: SortDirection | null) {
+    if (!this.sort) {
+      this._sortDir = null
+      return
+    }
+
+    const dir = `${value}`.toLowerCase()
+    this._sortDir = dir !== 'asc' && dir !== 'desc' ? 'desc' : dir
+  }
 
   get filter(): string | null {
     return this._filter
   }
 
-  private set filter(value: string | null) {}
+  private set filter(value: string | null) {
+    this._filter =
+      value === null || value === '' || value === undefined ? null : `${value}`
+  }
 }
 
 export interface SearchableRepositoryInterface<
